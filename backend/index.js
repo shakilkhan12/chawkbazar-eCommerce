@@ -1,7 +1,11 @@
 const express = require("express");
 const env = require("./config/envConfig")
+const connect = require("./config/db")
 const app = express();
-console.log(env);
+
+// database connection
+connect();
+
 app.get("/", (req, res) => {
       res.json({msg: 'Welcome to chawkbazar'});
 });
