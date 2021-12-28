@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
       res.json({msg: 'Welcome to chawkbazar'});
 });
 // user routes
-app.use(userRoutes);
+app.use('/api', userRoutes);
 
 const port = env.PORT || 5000;
 

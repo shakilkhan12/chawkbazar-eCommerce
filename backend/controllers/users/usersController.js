@@ -1,6 +1,6 @@
 const {validationResult} = require("express-validator");
 const UserModel = require("../../models/User");
-const {hashedPassword} = require("../../services/authServices");
+const {hashedPassword, createToken} = require("../../services/authServices");
 
 // @route POST /api/register
 // @access Public
@@ -18,7 +18,8 @@ module.exports.register = async (req, res) => {
                     email,
                     password: hashed
                 });
-                return res.status(201).json({msg: 'Your account has been created!'});
+                const token = createToken({id: user._id, name: user.name});
+                return res.status(201).json({msg: 'Your account has been created!', token});
             } else {
                 // email already taken
                 return res.status(401).json({errors: [{msg: `${email} is already taken`}]})
