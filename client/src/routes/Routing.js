@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-
 import AdminLogin from "../screens/auth/AdminLogin"
+import Products from "../screens/dashboard/Products";
 const Routing = () => {
    return(
        <BrowserRouter>
@@ -8,7 +8,9 @@ const Routing = () => {
            <Route path="auth">
                <Route path="admin-login" element={<AdminLogin />} />
            </Route>
-           {/* auth/admin-login */}
+           <Route path="dashboard">
+               <Route path="products" element={<Products />} />
+           </Route>
        </Routes>
        </BrowserRouter>
    )
