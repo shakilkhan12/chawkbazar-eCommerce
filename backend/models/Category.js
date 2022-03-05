@@ -5,5 +5,5 @@ const catgorySchema = mongoose.Schema({
         required: true,
         unique: true
     }
-})
+}, {timestamps: true})
 module.exports = mongoose.model("categorie", catgorySchema)

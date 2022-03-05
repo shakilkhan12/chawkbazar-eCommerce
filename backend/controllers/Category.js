@@ -16,5 +16,18 @@ class Category {
             return res.status(401).json({errors: errors.array()});
         }
     }
+    async categories(req, res) {
+         const page = req.params.page;
+         const perPage = 3;
+         const skip = (page - 1) * perPage;
+         try {
+             const count = await CatgoryModel.find({}).countDocuments();
+             const response = await CatgoryModel.find({}).skip(skip).limit(perPage).sort({updatedAt: -1})
+            return res.status(200).json({categories: response, perPage, count})
+         } catch (error) {
+             console.log(error.message);
+         }
+
+    }
 }
 module.exports = new Category;
