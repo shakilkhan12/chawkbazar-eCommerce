@@ -21,9 +21,17 @@ const categoryService = createApi({
                        body: name
                    }
                }
+           }),
+           get: builder.query({
+               query: (page) => {
+                   return {
+                     url: `categories/${page}`,
+                     method: 'GET'
+                   }
+               }
            })
        }
     }
 });
-export const {useCreateMutation} = categoryService
+export const {useCreateMutation, useGetQuery} = categoryService
 export default categoryService

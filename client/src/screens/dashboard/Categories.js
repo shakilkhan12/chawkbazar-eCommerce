@@ -1,12 +1,17 @@
 import {useEffect} from "react"
-import {Link} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import ScreenHeader from "../../components/ScreenHeader";
 import Wrapper from "./Wrapper"
 import { clearMessage } from "../../store/reducers/globalReducer";
+import { useGetQuery } from "../../store/services/categoryService";
 const Categories = () => {
+   const {page} = useParams();
+   console.log('Your page: ', page)
     const {success} = useSelector(state => state.globalReducer);
     const dispatch = useDispatch();
+    const {data = [], isLoading} = useGetQuery(page ? page : 1);
+    console.log(data, isLoading)
     useEffect(() => {
      return () => {
         dispatch(clearMessage())

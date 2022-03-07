@@ -4,5 +4,5 @@ const categoryValidations = require("../validations/categoryValidatons")
 const Category = require("../controllers/Category")
 const Authorization = require("../services/Authorization")
 router.post('/create-category', [categoryValidations, Authorization.authorized], Category.create);
-router.get("/categories/:page", Category.categories);
+router.get("/categories/:page", Authorization.authorized, Category.categories);
 module.exports = router;
