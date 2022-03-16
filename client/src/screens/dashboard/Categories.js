@@ -6,13 +6,15 @@ import Wrapper from "./Wrapper"
 import { clearMessage } from "../../store/reducers/globalReducer";
 import { useGetQuery } from "../../store/services/categoryService";
 import Spinner from "../../components/Spinner";
+import Pagination from "../../components/Pagination";
 const Categories = () => {
-   const {page} = useParams();
-   console.log('Your page: ', page)
+   let {page} = useParams();
+   if(!page) {
+      page = 1;
+   }
     const {success} = useSelector(state => state.globalReducer);
     const dispatch = useDispatch();
-    const {data = [], isLoading} = useGetQuery(page ? page : 1);
-    console.log(data, isLoading)
+    const {data = [], isFetching} = useGetQuery(page);
     useEffect(() => {
      return () => {
         dispatch(clearMessage())
@@ -24,7 +26,7 @@ const Categories = () => {
               <Link to="/dashboard/create-category" className="btn-dark">add categories <i className="bi bi-plus"></i></Link>
            </ScreenHeader>
            {success && <div className="alert-success">{success}</div>}
-           {!isLoading ? data?.categories?.length > 0 && <div>
+           {!isFetching ? data?.categories?.length > 0 && <><div>
               <table className="w-full bg-gray-900 rounded-md">
                  <thead>
                     <tr className="border-b border-gray-800 text-left">
@@ -43,7 +45,7 @@ const Categories = () => {
                     ))}
                  </tbody>
               </table>
-           </div> : <Spinner />}
+           </div><Pagination page={parseInt(page)} perPage={data.perPage} count={data.count} path="dashboard/categories" /></> : <Spinner />}
        </Wrapper>
     )
 }

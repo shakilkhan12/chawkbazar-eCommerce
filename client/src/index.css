@@ -18,4 +18,8 @@
   .alert-success {
     @apply bg-indigo-100 text-indigo-900 p-3 mb-2 text-sm font-medium border-l-4 border-indigo-600;
   }
+  /* Pagination */
+  .pagination-link {
+    @apply border border-gray-800 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
+  }
 }
