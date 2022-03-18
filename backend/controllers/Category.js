@@ -29,5 +29,14 @@ class Category {
          }
 
     }
+    async fetchCategory(req, res) {
+        const {id} = req.params;
+        try {
+            const response = await CatgoryModel.findOne({_id: id})
+            return res.status(200).json({category: response})
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
 }
 module.exports = new Category;

@@ -1,14 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "./tailwindcss/buttons.css";
+@import "tailwindcss/utilities";
 
 @layer components {
-  .btn-dark {
-    @apply bg-gray-900 px-4 py-3 capitalize font-medium;
-  }
-  .btn-indigo {
-    @apply bg-indigo-600 text-white capitalize font-medium px-4 py-3 cursor-pointer;
-  }
   .form-control {
     @apply bg-gray-900 p-3 rounded-sm outline-none w-full;
   }
@@ -18,7 +13,7 @@
   .alert-success {
     @apply bg-indigo-100 text-indigo-900 p-3 mb-2 text-sm font-medium border-l-4 border-indigo-600;
   }
-  /* Pagination */
+
   .pagination-link {
     @apply border border-gray-800 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
   }
