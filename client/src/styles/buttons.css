@@ -10,3 +10,6 @@
 .btn-warning {
   @apply bg-orange-400 py-[6px];
 }
+.btn-danger {
+  @apply bg-rose-500 py-[6px];
+}

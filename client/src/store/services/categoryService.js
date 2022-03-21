@@ -35,6 +35,15 @@ const categoryService = createApi({
                },
                invalidatesTags: ['categories']
            }),
+           deleteCategory: builder.mutation({
+               query: (id) => {
+                   return {
+                       url: `delete-category/${id}`,
+                       method: 'DELETE'
+                   }
+               },
+               invalidatesTags: ['categories']
+           }),
            get: builder.query({
                query: (page) => {
                    return {
@@ -56,5 +65,5 @@ const categoryService = createApi({
        }
     }
 });
-export const {useCreateMutation, useGetQuery, useFetchCategoryQuery, useUpdateCategoryMutation} = categoryService
+export const {useCreateMutation, useGetQuery, useFetchCategoryQuery, useUpdateCategoryMutation, useDeleteCategoryMutation} = categoryService
 export default categoryService
