@@ -16,7 +16,7 @@ const Categories = () => {
     const dispatch = useDispatch();
     const {data = [], isFetching} = useGetQuery(page);
     const [removeCategory, response] = useDeleteCategoryMutation();
-    console.log(response)
+    console.log(data)
     const deleteCat = id => {
        if(window.confirm('Are you really want to delete the category?')) {
           removeCategory(id);

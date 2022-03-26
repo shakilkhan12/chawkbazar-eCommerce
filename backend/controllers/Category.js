@@ -23,6 +23,7 @@ class Category {
          try {
              const count = await CatgoryModel.find({}).countDocuments();
              const response = await CatgoryModel.find({}).skip(skip).limit(perPage).sort({updatedAt: -1})
+             console.log(response)
             return res.status(200).json({categories: response, perPage, count})
          } catch (error) {
              console.log(error.message);
@@ -62,6 +63,14 @@ class Category {
             return res.status(200).json({message: 'Category has deleted successfully!'})
         } catch (error) {
             console.log(error.message);
+            return res.status(500).json('Server internal error!');
+        }
+    }
+    async allCategories(req, res) {
+        try {
+            const categories = await CatgoryModel.find({});
+            return res.status(200).json({categories})
+        } catch (error) {
             return res.status(500).json('Server internal error!');
         }
     }

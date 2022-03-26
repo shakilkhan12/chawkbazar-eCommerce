@@ -1,12 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "./styles/buttons.css";
+@import "./styles/form.css";
 @import "tailwindcss/utilities";
 
 @layer components {
-  .form-control {
-    @apply bg-gray-900 p-3 rounded-sm outline-none w-full;
-  }
   .alert-danger {
     @apply bg-rose-100 text-rose-700 p-3 mb-2 border-l-4 border-rose-600 text-sm font-medium;
   }

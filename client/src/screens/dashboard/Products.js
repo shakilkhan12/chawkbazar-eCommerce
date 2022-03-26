@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
 import Wrapper from "./Wrapper"
 const Products = () => {
     return(
        <Wrapper>
-           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel molestiae tempora voluptatibus rem neque optio, deserunt, autem, est distinctio assumenda ratione cum esse at. Vero inventore officia perspiciatis quisquam consequatur!
+          <Link to="/dashboard/create-product" className="btn-dark">create product</Link>
+          
        </Wrapper>
     )
 }
