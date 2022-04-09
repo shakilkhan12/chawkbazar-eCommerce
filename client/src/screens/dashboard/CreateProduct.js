@@ -88,13 +88,33 @@ const CreateProduct = () => {
                             <TwitterPicker onChangeComplete={saveColors} />
                             </div>
                     
-                            <div className="w-full md:w-6/12 p-3">
+                            <div className="w-full p-3">
                             <label htmlFor="sizes" className="label">choose sizes</label>
                              {sizes.length > 0 && <div className="flex flex-wrap -mx-3">
                                  {sizes.map(size => (
                                      <div key={size.name} className='size' onClick={() => chooseSize(size)}>{size.name}</div>
                                  ))}
                                  </div>}
+                            </div>
+                            <div className="w-full p-3">
+                                <label htmlFor="image1" className="label">
+                                   Image 1
+                                </label>
+                                <input type="file" name="image1" id="image1" className="input-file" />
+                            </div>
+
+                            <div className="w-full p-3">
+                                <label htmlFor="image2" className="label">
+                                   Image 2
+                                </label>
+                                <input type="file" name="image2" id="image2" className="input-file" />
+                            </div>
+
+                            <div className="w-full p-3">
+                                <label htmlFor="image3" className="label">
+                                   Image 3
+                                </label>
+                                <input type="file" name="image3" id="image3" className="input-file" />
                             </div>
                     </div>
                 </div>
