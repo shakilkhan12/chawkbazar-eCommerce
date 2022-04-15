@@ -1,0 +1,19 @@
+.alert-danger {
+    @apply bg-rose-100 text-rose-700 p-3 mb-2 border-l-4 border-rose-600 text-sm font-medium;
+  }
+  .alert-success {
+    @apply bg-indigo-100 text-indigo-900 p-3 mb-2 text-sm font-medium border-l-4 border-indigo-600;
+  }
+
+  .pagination-link {
+    @apply border border-gray-800 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
+  }
+  .size {
+    @apply border border-gray-400 ml-2 px-3 py-1.5 mt-2 uppercase cursor-pointer rounded text-gray-400 text-sm;
+  }
+  .right-heading {
+    @apply capitalize my-2 text-gray-400 text-base;
+  }
+  .preivew-image {
+    @apply w-full max-h-[190px] h-full rounded-md overflow-hidden mt-3;
+  }
