@@ -17,3 +17,9 @@
   .preivew-image {
     @apply w-full max-h-[190px] h-full rounded-md overflow-hidden mt-3;
   }
+  .ql-toolbar.ql-snow {
+    @apply border-none bg-gray-900 !important;
+  }
+  .ql-container.ql-snow {
+    @apply border-none bg-gray-700 !important;
+  }

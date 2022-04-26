@@ -2,6 +2,8 @@ import {useState} from "react";
 import { Link } from "react-router-dom"
 import {TwitterPicker} from "react-color"
 import { v4 as uuidv4 } from 'uuid';
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css';
 import ScreenHeader from "../../components/ScreenHeader"
 import Wrapper from "./Wrapper"
 import { useAllCategoriesQuery } from "../../store/services/categoryService"
@@ -11,6 +13,8 @@ import SizesList from "../../components/SizesList";
 import ImagesPreview from "../../components/ImagesPreview";
 const CreateProduct = () => {
     const {data = [], isFetching} = useAllCategoriesQuery();
+    const [value, setValue] = useState('');
+    console.log(`Rich tex editor: ${value}`)
     const [state, setState] = useState({
         title: '',
         price: 0,
@@ -136,6 +140,15 @@ const CreateProduct = () => {
                                 </label>
                                 <input type="file" name="image3" id="image3" className="input-file" onChange={imageHandle} />
                             </div>
+                            <div className="w-full p-3">
+                                <label htmlFor="description" className="label">
+                                   Description
+                                </label>
+                                <ReactQuill theme="snow" id="description" value={value} onChange={setValue}  placeholder="Description..." />
+                                </div>
+                        <div className="w-full p-3">
+                            <input type="submit" value="save product" className="btn btn-indigo" />
+                        </div>
                     </div>
                 </div>
                 <div className="w-full xl:w-4/12 p-3">
