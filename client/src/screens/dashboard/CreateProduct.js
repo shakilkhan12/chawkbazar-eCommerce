@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import ScreenHeader from "../../components/ScreenHeader"
 import Wrapper from "./Wrapper"
 import { useAllCategoriesQuery } from "../../store/services/categoryService"
+import { useCProductMutation } from "../../store/services/productService";
 import Spinner from "../../components/Spinner"
 import Colors from "../../components/Colors";
 import SizesList from "../../components/SizesList";
@@ -14,7 +15,6 @@ import ImagesPreview from "../../components/ImagesPreview";
 const CreateProduct = () => {
     const {data = [], isFetching} = useAllCategoriesQuery();
     const [value, setValue] = useState('');
-    console.log(`Rich tex editor: ${value}`)
     const [state, setState] = useState({
         title: '',
         price: 0,
@@ -73,14 +73,26 @@ const CreateProduct = () => {
         const filtered = sizeList.filter(size => size.name !== name);
         setSizeList(filtered);
     }
-    console.log(preview)
+    const [createNewProduct, response] = useCProductMutation();
+    console.log('Your response', response)
+    const createPro = e => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(state));
+        formData.append('sizes', JSON.stringify(sizeList));
+        formData.append('description', value)
+        formData.append('image1', state.image1)
+        formData.append('image2', state.image2)
+        formData.append('image3', state.image3)
+        createNewProduct(formData);
+    }
     return(
         <Wrapper>
             <ScreenHeader>
             <Link to="/dashboard/products" className="btn-dark"><i className="bi bi-arrow-left-short"></i> proudcts list</Link>
             </ScreenHeader>
             <div className="flex flex-wrap -mx-3">
-                <div className="w-full xl:w-8/12 p-3">
+                <form className="w-full xl:w-8/12 p-3" onSubmit={createPro}>
                     <div className="flex flex-wrap">
                         <div className="w-full md:w-6/12 p-3">
                             <label htmlFor="title" className="label">title</label>
@@ -150,7 +162,7 @@ const CreateProduct = () => {
                             <input type="submit" value="save product" className="btn btn-indigo" />
                         </div>
                     </div>
-                </div>
+                </form>
                 <div className="w-full xl:w-4/12 p-3">
                    <Colors colors={state.colors} deleteColor={deleteColor} />
                    <SizesList list={sizeList} deleteSize={deleteSize} />
