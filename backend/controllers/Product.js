@@ -88,5 +88,18 @@ class Product {
          }
       })
    }
+   async get(req, res)  {
+      const {page} = req.params;
+      const perPage = 5;
+      const skip = (page - 1) * perPage;
+      try {
+         const count = await ProductModel.find({}).countDocuments();
+         const response = await ProductModel.find({}).skip(skip).limit(perPage).sort({updatedAt: -1})
+         console.log(response)
+        return res.status(200).json({products: response, perPage, count})
+     } catch (error) {
+         console.log(error.message);
+     }
+   }
 }
 module.exports = new Product;
