@@ -31,7 +31,7 @@ const Pagination = ({page, count, perPage, path}) => {
               return <li><Link className="pagination-link" to={`/${path}/${page - 1}`}><i class="bi bi-chevron-double-left"></i></Link></li>
           }
       }
-    return count > 3 && (
+    return count > perPage && (
         <ul className="flex mt-2">
             {prev()}
             {links()}
