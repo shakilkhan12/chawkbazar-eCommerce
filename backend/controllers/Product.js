@@ -1,5 +1,6 @@
 const formidable = require('formidable');
 const {v4: uuidv4 } = require("uuid")
+const {validationResult} = require("express-validator")
 const fs = require("fs");
 const path = require("path");
 const ProductModel = require("../models/ProductModel");
@@ -109,6 +110,21 @@ class Product {
       } catch (error) {
          return res.status(500).json({error: error.message})
          console.log(error.message);
+      }
+   }
+   async updateProduct(req, res) {
+      const errors = validationResult(req);
+      if(errors.isEmpty()) {
+         try {
+            const {_id, title, price, discount, stock, colors, sizes, description, category} = req.body;
+            const response = await ProductModel.updateOne({_id}, {$set: {title, price, discount, stock, category, colors, sizes, description}})
+            return res.status(200).json({msg: 'Product has updated', response})
+         } catch (error) {
+            console.log(error)
+            return res.status(500).json({errors: error})
+         }
+      } else {
+         return res.status(400).json({errors: errors.array()});
       }
    }
 }

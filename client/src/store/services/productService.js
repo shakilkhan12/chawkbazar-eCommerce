@@ -25,6 +25,16 @@ const productService = createApi({
                 },
                 invalidatesTags: ['products']
             }),
+            updateProduct: builder.mutation({
+                query: data => {
+                    return {
+                       url: '/product',
+                       method: 'PUT',
+                       body: data
+                    }
+                },
+                invalidatesTags: ['products']
+            }),
             getProducts: builder.query({
                 query: (page) => {
                  return {
@@ -46,5 +56,5 @@ const productService = createApi({
         }
     }
 })
-export const {useCProductMutation, useGetProductsQuery, useGetProductQuery} = productService;
+export const {useCProductMutation, useUpdateProductMutation, useGetProductsQuery, useGetProductQuery} = productService;
 export default productService
