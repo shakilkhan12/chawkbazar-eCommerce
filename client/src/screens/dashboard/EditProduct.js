@@ -5,6 +5,7 @@ import {TwitterPicker} from "react-color"
 import { v4 as uuidv4 } from 'uuid';
 import ReactQuill from "react-quill"
 import toast, { Toaster } from 'react-hot-toast';
+import parser from "html-react-parser"
 import 'react-quill/dist/quill.snow.css';
 import ScreenHeader from "../../components/ScreenHeader"
 import Wrapper from "./Wrapper"
@@ -83,10 +84,13 @@ const EditProduct = () => {
         }
     }, [response?.isSuccess])
     useEffect(() => {
+     setState({...state, description: value})
+    }, [value])
+    useEffect(() => {
      if(!fetching) {
         setState(product)
         setSizeList(product.sizes)
-        setValue(product.description)
+        setValue(parser(product.description))
      }
     }, [product])
     console.log('your state: ', state)
