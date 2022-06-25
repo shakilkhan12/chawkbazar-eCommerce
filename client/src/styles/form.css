@@ -7,3 +7,9 @@
 .input-file {
   @apply block file:py-2.5 file:px-4 file:rounded file:cursor-pointer file:bg-indigo-600 file:text-white file:text-sm file:font-medium file:mr-4;
 }
+.form-label {
+  @apply block mb-1.5 text-sm font-medium capitalize text-gray-700;
+}
+.form-input {
+  @apply w-full border px-3 py-3 border-gray-300 rounded-md outline-none; 
+}

@@ -8,10 +8,16 @@ import CreateProduct from "../screens/dashboard/CreateProduct"
 import Private from "./Private.js"
 import Public from "./Public";
 import EditProduct from "../screens/dashboard/EditProduct";
+import Home from "../screens/home/Home";
+import Login from "../screens/home/auth/Login";
+import Register from "../screens/home/auth/Register";
 const Routing = () => {
    return(
        <BrowserRouter>
        <Routes>
+           <Route path='/' element={<Home />} />
+           <Route path='login' element={<Login />} />
+           <Route path='register' element={<Register />} />
            <Route path="auth">
                <Route path="admin-login" element={<Public><AdminLogin /></Public >} />
            </Route>

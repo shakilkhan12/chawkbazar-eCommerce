@@ -1,0 +1,12 @@
+.nav {
+    @apply bg-white w-full h-[70px] flex items-center shadow-sm fixed top-0 right-0 left-0;
+}
+.nav-li {
+    @apply ml-8;
+}
+.nav-link {
+    @apply text-base font-medium text-black capitalize;
+}
+.nav-circle {
+   @apply flex items-center justify-center w-[22px] h-[22px] rounded-full bg-indigo-600 text-xs text-white font-medium absolute -top-2 -right-3;
+}

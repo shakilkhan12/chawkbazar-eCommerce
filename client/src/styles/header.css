@@ -1,0 +1,9 @@
+.header {
+    @apply w-full h-[300px] bg-[url('../assets/images/header.jpg')] bg-no-repeat bg-cover relative -z-10;
+}
+.header-cover {
+    @apply absolute inset-0 w-full h-full bg-black/40;
+}
+.header-heading {
+    @apply text-white text-2xl capitalize font-medium;
+}

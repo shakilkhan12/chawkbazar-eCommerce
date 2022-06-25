@@ -3,5 +3,7 @@
 @import "./styles/buttons.css";
 @import "./styles/form.css";
 @import "./styles/styles.css";
+@import "./styles/nav.css";
+@import "./styles/header.css";
 @import "tailwindcss/utilities";
 

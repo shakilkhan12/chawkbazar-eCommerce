@@ -23,3 +23,12 @@
   .ql-container.ql-snow {
     @apply border-none bg-gray-700 !important;
   }
+  .my-container {
+    @apply max-w-screen-xl w-full mx-auto px-6;
+  }
+  .flex-y {
+    @apply flex items-center;
+  }
+  .heading {
+    @apply text-lg capitalize font-medium;
+  }
