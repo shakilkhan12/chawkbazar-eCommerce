@@ -32,3 +32,6 @@
   .heading {
     @apply text-lg capitalize font-medium;
   }
+  .error {
+    @apply block mt-1.5 text-rose-600 font-medium text-sm; 
+  }

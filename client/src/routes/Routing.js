@@ -11,6 +11,7 @@ import EditProduct from "../screens/dashboard/EditProduct";
 import Home from "../screens/home/Home";
 import Login from "../screens/home/auth/Login";
 import Register from "../screens/home/auth/Register";
+import Dashboard from "../screens/users/Dashboard";
 const Routing = () => {
    return(
        <BrowserRouter>
@@ -18,6 +19,7 @@ const Routing = () => {
            <Route path='/' element={<Home />} />
            <Route path='login' element={<Login />} />
            <Route path='register' element={<Register />} />
+           <Route path='user' element={<Dashboard />} />
            <Route path="auth">
                <Route path="admin-login" element={<Public><AdminLogin /></Public >} />
            </Route>
