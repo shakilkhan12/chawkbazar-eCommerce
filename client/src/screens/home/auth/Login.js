@@ -6,16 +6,15 @@ import { setUserToken } from "../../../store/reducers/authReducer";
 import Header from "../../../components/home/Header";
 import Nav from "../../../components/home/Nav";
 import { useUserLoginMutation } from "../../../store/services/authService";
+import { useForm } from "../../../hooks/Form";
+import { showError } from "../../../utils/ShowError";
 
 const Login = () => {
     const [errors, setErrors] = useState([]);
-    const [state, setState] = useState({
+    const {state, onChange} = useForm({
         email: '',
         password: ''
     })
-    const onChange = e => {
-        setState({...state, [e.target.name] : e.target.value})
-    }
     const [loginUser, response] = useUserLoginMutation()
     const onSubmit = e => {
         e.preventDefault();
@@ -35,14 +34,6 @@ const Login = () => {
           navigate('/user');
         }
       }, [response.isSuccess])
-      const showError = name => {
-        const exist = errors.find(err => err.param === name);
-        if(exist) {
-            return exist.msg;
-        } else {
-            return false;
-        }
-    }
     return(
         <>
         <Nav />
@@ -59,13 +50,13 @@ const Login = () => {
                     <h1 className="heading mb-5">sign in</h1>
                     <div className="mb-4">
                         <label htmlFor="email" className="form-label">email</label>
-                        <input type="email" name="email" id="email" className={`form-input ${showError('email') ? 'border-rose-600 bg-rose-50' : 'border-gray-300 bg-white'}`}  placeholder="Email..." value={state.email} onChange={onChange} />
-                        {showError('email') && <span className="error">{showError('email')}</span>}
+                        <input type="email" name="email" id="email" className={`form-input ${showError(errors, 'email') ? 'border-rose-600 bg-rose-50' : 'border-gray-300 bg-white'}`}  placeholder="Email..." value={state.email} onChange={onChange} />
+                        {showError(errors, 'email') && <span className="error">{showError(errors,'email')}</span>}
                     </div>
                     <div className="mb-4">
                         <label htmlFor="password" className="form-label">password</label>
-                        <input type="password" name="password" id="password" className={`form-input ${showError('password') ? 'border-rose-600 bg-rose-50' : 'border-gray-300 bg-white'}`}  placeholder="Password..." value={state.password} onChange={onChange} />
-                        {showError('password') && <span className="error">{showError('password')}</span>}
+                        <input type="password" name="password" id="password" className={`form-input ${showError(errors, 'password') ? 'border-rose-600 bg-rose-50' : 'border-gray-300 bg-white'}`}  placeholder="Password..." value={state.password} onChange={onChange} />
+                        {showError(errors,'password') && <span className="error">{showError(errors,'password')}</span>}
                     </div>  
                     <div className="mb-4">
                         <input type="submit" value={`${response.isLoading ? 'Loading...' : 'sign in'}`} className="btn btn-indigo w-full " disabled={response.isLoading ? true : false} />
