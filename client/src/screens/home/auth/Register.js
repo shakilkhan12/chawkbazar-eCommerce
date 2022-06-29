@@ -77,7 +77,7 @@ const Register = () => {
                         {showError('password') && <span className="error">{showError('password')}</span>}
                     </div>  
                     <div className="mb-4">
-                        <input type="submit" value="sign up" className="btn btn-indigo w-full " />
+                        <input type="submit" value={`${response.isLoading ? 'Loading...' : 'sign up'}`} className="btn btn-indigo w-full" disabled={response.isLoading ? true : false} />
                     </div>
                     <div>
                         <p>Already have an account ? <span className="capitalize font-medium text-base text-black"><Link to="/login">sign in</Link></span></p>

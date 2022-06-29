@@ -53,10 +53,10 @@ module.exports.login = async (req, res) => {
                         return res.status(201).json({token, admin: false});
                      }
                   } else {
-                      return res.status(400).json({errors: [{msg: 'password not matched!'}]})
+                      return res.status(400).json({errors: [{msg: 'password not matched!', param: 'password'}]})
                   }
              } else {
-                 return res.status(400).json({errors: [{msg: `${email} is not found!`}]});
+                 return res.status(400).json({errors: [{msg: `${email} is not found!`, param: 'email'}]});
              }
          } catch (error) {
              console.log(error.message)
