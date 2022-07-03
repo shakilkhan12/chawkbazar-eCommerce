@@ -11,7 +11,7 @@ const Dashboard = () => {
       <Header>
         my account
       </Header>
-      <div className="my-container mt-[80px]">
+      <div className="my-container mt-[40px]">
         <div className="flex flex-wrap -mx-6">
           <div className="w-full md:w-4/12 p-6">
             <AccountList />
