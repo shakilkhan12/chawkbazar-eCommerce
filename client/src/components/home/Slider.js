@@ -21,11 +21,13 @@ const Slider = () => {
       {data?.categories.length > 0 &&
         data?.categories.map((cat, index) => (
           <SwiperSlide className="slide" key={cat._id}>
-            <div
-              className={`slide-img bg-[url('../public/images/slider/${
-                index + 1
-              }.jpg')]`}
-            ></div>
+            <div className={`slide-img`}>
+              <img
+                src={`./images/slider/${index + 1}.jpg`}
+                className="w-full h-full object-cover"
+                alt=""
+              />
+            </div>
             <div className="absolute inset-0 w-full h-full bg-black/50">
               <div className="my-container h-[70vh] flex flex-col items-center justify-center">
                 <h1 className="text-white text-xl font-medium capitalize">

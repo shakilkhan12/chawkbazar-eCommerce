@@ -24,6 +24,6 @@ router.delete(
   Authorization.authorized,
   Category.deleteCategory
 );
-router.get("/allcategories", Authorization.authorized, Category.allCategories);
+router.get("/allcategories", Category.allCategories);
 router.get("/random-categories", Category.randomCategories);
 module.exports = router;
