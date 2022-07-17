@@ -18,6 +18,7 @@ const Store = configureStore({
     getDefaultMiddleware().concat([
       categoryService.middleware,
       productService.middleware,
+      homeProducts.middleware,
     ]),
 });
 export default Store;
