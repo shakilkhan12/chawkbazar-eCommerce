@@ -15,7 +15,7 @@ const Categories = () => {
           key={item}
         >
           <Skeleton>
-            <Thumbnail />
+            <Thumbnail height="150px" />
           </Skeleton>
         </div>
       ))}
