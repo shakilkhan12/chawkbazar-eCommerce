@@ -15,6 +15,7 @@ import Dashboard from "../screens/users/Dashboard";
 import UserRoute from "./UserRoute";
 import UserAuthRoute from "./UserAuthRoute";
 import CatProducts from "../screens/home/CatProducts";
+import Product from "../screens/home/Product";
 const Routing = () => {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ const Routing = () => {
         <Route path="/" element={<Home />} />
         <Route path="cat-products/:name" element={<CatProducts />} />
         <Route path="cat-products/:name/:page" element={<CatProducts />} />
+        <Route path="product/:name" element={<Product />} />
         <Route element={<UserAuthRoute />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

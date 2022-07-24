@@ -6,10 +6,13 @@
   }
 
   .pagination-link {
-    @apply border border-gray-800 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
+    @apply border border-gray-800 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900 border-r-0;
   }
   .pagination-link-light {
-    @apply border border-gray-400 text-gray-700 text-sm font-medium block py-2 px-4 bg-white;
+    @apply border border-gray-400 text-gray-700 text-sm font-medium block py-2 px-4 bg-white border-r-0;
+  }
+  .pagination-li:last-child {
+    @apply border-r border-r-gray-400
   }
   .size {
     @apply border border-gray-400 ml-2 px-3 py-1.5 mt-2 uppercase cursor-pointer rounded text-gray-400 text-sm;

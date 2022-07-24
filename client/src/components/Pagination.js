@@ -14,7 +14,7 @@ const Pagination = ({ page, count, perPage, path, theme }) => {
     const allLinks = [];
     for (let i = startLoop; i <= endLoop; i++) {
       allLinks.push(
-        <li key={i}>
+        <li key={i} className="pagination-li">
           <Link
             className={` ${
               theme === "light" ? "pagination-link-light" : "pagination-link"
@@ -31,7 +31,7 @@ const Pagination = ({ page, count, perPage, path, theme }) => {
   const next = () => {
     if (page < totalLinks) {
       return (
-        <li>
+        <li className="pagination-li">
           <Link
             className={`${
               theme === "light" ? "pagination-link-light" : "pagination-link"
@@ -47,7 +47,7 @@ const Pagination = ({ page, count, perPage, path, theme }) => {
   const prev = () => {
     if (page > 1) {
       return (
-        <li>
+        <li className="pagination-li">
           <Link
             className={`${
               theme === "light" ? "pagination-link-light" : "pagination-link"
