@@ -3,6 +3,7 @@ import { FiChevronRight } from "react-icons/fi";
 import { useGetProductQuery } from "../../store/services/productService";
 import Nav from "../../components/home/Nav";
 import DetailsCard from "../../components/home/DetailsCard";
+import ProductLoader from "../../components/home/ProductLoader";
 
 const Product = () => {
   const { name } = useParams();
@@ -13,7 +14,7 @@ const Product = () => {
       <Nav />
       <div className="my-container mt-24">
         {isFetching ? (
-          "loading"
+          <ProductLoader />
         ) : (
           <>
             <ul className="flex items-center">

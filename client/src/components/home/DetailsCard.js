@@ -1,37 +1,23 @@
 import currency from "currency-formatter";
 import h2p from "html2plaintext";
+import htmlFormat from "html-to-formatted-text";
+import DetailsImage from "./DetailsImage";
+import Quantity from "./Quantity";
 const DetailsCard = ({ product }) => {
   const percentage = product.discount / 100;
   const discountPrice = product.price - product.price * percentage;
-  console.log("details: ", product);
+  let desc = h2p(product.description);
+  desc = htmlFormat(desc);
   return (
     <div className="flex flex-wrap -mx-5">
-      <div className="w-full sm:w-6/12 p-5">
+      <div className="w-full order-2 md:order-1 md:w-6/12 p-5">
         <div className="flex flex-wrap -mx-1">
-          <div className="w-full sm:w-6/12 p-1">
-            <img
-              src={`/images/${product.image1}`}
-              alt="image1"
-              className="w-full h-auto object-cover"
-            />
-          </div>
-          <div className="w-full sm:w-6/12 p-1">
-            <img
-              src={`/images/${product.image2}`}
-              alt="image2"
-              className="w-full h-auto object-cover"
-            />
-          </div>
-          <div className="w-full sm:w-6/12 p-1">
-            <img
-              src={`/images/${product.image3}`}
-              alt="image3"
-              className="w-full h-auto object-cover"
-            />
-          </div>
+          <DetailsImage image={product.image1} />
+          <DetailsImage image={product.image2} />
+          <DetailsImage image={product.image3} />
         </div>
       </div>
-      <div className="w-full sm:w-6/12 p-5">
+      <div className="w-full order-1 md:order-2 md:w-6/12 p-5">
         <h1 className="text-2xl font-bold text-gray-900 capitalize">
           {product.title}
         </h1>
@@ -84,10 +70,18 @@ const DetailsCard = ({ product }) => {
             </div>
           </>
         )}
+        <div className="flex -mx-3 items-center">
+          <div className="w-full sm:w-6/12 p-3">
+            <Quantity />
+          </div>
+          <div className="w-full sm:w-6/12 p-3">
+            <button className="btn btn-indigo">add to cart</button>
+          </div>
+        </div>
         <h3 className="text-base font-medium capitalize text-gray-600 mb-2 mt-3">
           description
         </h3>
-        <p>{h2p(product.description)}</p>
+        <p className="mt-4 leading-[27px]">{desc}</p>
       </div>
     </div>
   );
