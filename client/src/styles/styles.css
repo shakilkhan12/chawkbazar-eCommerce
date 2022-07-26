@@ -50,6 +50,19 @@
   a.active {
     @apply bg-gray-50;
   }
+  .description h1 {
+      @apply text-4xl capitalize;
+  }
+  .description h2 {
+      @apply text-3xl capitalize;
+  }
+  .description h3 {
+      @apply text-2xl capitalize;
+  }
+  .description h4 {
+    @apply text-xl capitalize;
+}
+  
 
   /* Swiper styles */
   .slide {

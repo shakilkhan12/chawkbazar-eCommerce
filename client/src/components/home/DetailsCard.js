@@ -1,13 +1,24 @@
+import { useState } from "react";
 import currency from "currency-formatter";
 import h2p from "html2plaintext";
-import htmlFormat from "html-to-formatted-text";
+import htmlParser from "html-react-parser";
 import DetailsImage from "./DetailsImage";
 import Quantity from "./Quantity";
 const DetailsCard = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+  const inc = () => {
+    setQuantity(quantity + 1);
+  };
+  const dec = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
   const percentage = product.discount / 100;
   const discountPrice = product.price - product.price * percentage;
   let desc = h2p(product.description);
-  desc = htmlFormat(desc);
+  desc = htmlParser(desc);
+
   return (
     <div className="flex flex-wrap -mx-5">
       <div className="w-full order-2 md:order-1 md:w-6/12 p-5">
@@ -72,7 +83,7 @@ const DetailsCard = ({ product }) => {
         )}
         <div className="flex -mx-3 items-center">
           <div className="w-full sm:w-6/12 p-3">
-            <Quantity />
+            <Quantity quantity={quantity} inc={inc} dec={dec} />
           </div>
           <div className="w-full sm:w-6/12 p-3">
             <button className="btn btn-indigo">add to cart</button>
@@ -81,7 +92,7 @@ const DetailsCard = ({ product }) => {
         <h3 className="text-base font-medium capitalize text-gray-600 mb-2 mt-3">
           description
         </h3>
-        <p className="mt-4 leading-[27px]">{desc}</p>
+        <div className="mt-4 leading-[27px] description">{desc}</div>
       </div>
     </div>
   );
