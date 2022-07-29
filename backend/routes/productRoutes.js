@@ -13,5 +13,5 @@ router.put(
   Product.updateProduct
 );
 router.delete("/delete/:id", Authorization.authorized, Product.deleteProduct);
-router.get("/cat-products/:name/:page", HomeProducts.catProducts);
+router.get("/cat-products/:name/:page?", HomeProducts.catProducts);
 module.exports = router;
