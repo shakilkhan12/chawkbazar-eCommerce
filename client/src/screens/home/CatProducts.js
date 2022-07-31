@@ -28,7 +28,7 @@ const CatProducts = () => {
             </p>
             <div className="flex flex-wrap -mx-5">
               {data.products.map((product) => {
-                return <ProductCard product={product} />;
+                return <ProductCard product={product} key={product._id} />;
               })}
             </div>
             <Pagination
