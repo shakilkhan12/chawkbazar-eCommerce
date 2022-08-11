@@ -3,9 +3,16 @@ import currency from "currency-formatter";
 import { motion } from "framer-motion";
 import h2p from "html2plaintext";
 import htmlParser from "html-react-parser";
+import { BsCheck2 } from "react-icons/bs";
 import DetailsImage from "./DetailsImage";
 import Quantity from "./Quantity";
 const DetailsCard = ({ product }) => {
+  const [sizeState, setSizeState] = useState(
+    product?.sizes?.length > 0 && product.sizes[0].name
+  );
+  const [colorState, setColorState] = useState(
+    product?.colors?.length > 0 && product.colors[0].color
+  );
   const [quantity, setQuantity] = useState(1);
   const inc = () => {
     setQuantity(quantity + 1);
@@ -55,10 +62,17 @@ const DetailsCard = ({ product }) => {
             <div className="flex flex-wrap -mx-1">
               {product.sizes.map((size) => (
                 <div
-                  className="p-2 m-1 border border-gray-300 rounded cursor-pointer"
+                  className={`p-2 m-1 border border-gray-300 rounded cursor-pointer ${
+                    sizeState === size.name && "bg-indigo-600"
+                  }`}
                   key={size.name}
+                  onClick={() => setSizeState(size.name)}
                 >
-                  <span className="text-sm font-semibold uppercase text-gray-900">
+                  <span
+                    className={`text-sm font-semibold uppercase  ${
+                      sizeState === size.name ? "text-white" : "text-gray-900"
+                    }`}
+                  >
                     {size.name}
                   </span>
                 </div>
@@ -75,12 +89,17 @@ const DetailsCard = ({ product }) => {
               {product.colors.map((color) => (
                 <div
                   key={color.color}
+                  onClick={() => setColorState(color.color)}
                   className="border border-gray-300 rounded m-1 p-1 cursor-pointer"
                 >
                   <span
-                    className="min-w-[40px] min-h-[40px] rounded block"
+                    className="min-w-[40px] min-h-[40px] rounded flex items-center justify-center"
                     style={{ backgroundColor: color.color }}
-                  ></span>
+                  >
+                    {colorState === color.color && (
+                      <BsCheck2 className="text-white" size={20} />
+                    )}
+                  </span>
                 </div>
               ))}
             </div>
