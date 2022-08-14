@@ -12,9 +12,10 @@ const Store = configureStore({
     [categoryService.reducerPath]: categoryService.reducer,
     [productService.reducerPath]: productService.reducer,
     [homeProducts.reducerPath]: homeProducts.reducer,
-    [cartReducer.reducerPath]: cartReducer.reducer,
+
     authReducer: authReducer,
     globalReducer: globalReducer,
+    cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([

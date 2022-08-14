@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import DetailsImage from "./DetailsImage";
 import Quantity from "./Quantity";
 import { addCart } from "../../store/reducers/cartReducer";
+import { discount } from "../../utils/discount";
 const DetailsCard = ({ product }) => {
   const [sizeState, setSizeState] = useState(
     product?.sizes?.length > 0 && product.sizes[0].name
@@ -25,8 +26,8 @@ const DetailsCard = ({ product }) => {
       setQuantity(quantity - 1);
     }
   };
-  const percentage = product.discount / 100;
-  const discountPrice = product.price - product.price * percentage;
+
+  const discountPrice = discount(product.price, product.discount);
   let desc = h2p(product.description);
   desc = htmlParser(desc);
   const dispatch = useDispatch();
