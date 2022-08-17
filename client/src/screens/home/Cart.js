@@ -1,19 +1,29 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import currency from "currency-formatter";
 import { BsTrash } from "react-icons/bs";
+import { motion } from "framer-motion";
 import Nav from "../../components/home/Nav";
 import { discount } from "../../utils/discount";
 import Quantity from "../../components/home/Quantity";
+import { incQuantity, decQuantity } from "../../store/reducers/cartReducer";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cartReducer);
-  console.log(cart);
-  const inc = () => {};
-  const dec = () => {};
+  const dispatch = useDispatch();
+  const inc = (id) => {
+    dispatch(incQuantity(id));
+  };
+  const dec = (id) => {
+    dispatch(decQuantity(id));
+  };
   return (
     <>
       <Nav />
-      <div className="my-container mt-28">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="my-container mt-28"
+      >
         {cart.length > 0 ? (
           <div className="table-container">
             <table className="w-full">
@@ -36,7 +46,7 @@ const Cart = () => {
                     }
                   );
                   return (
-                    <tr className="even:bg-gray-50">
+                    <tr className="even:bg-gray-50" key={item._id}>
                       <td className="td">
                         <img
                           src={`/images/${item.image1}`}
@@ -53,8 +63,8 @@ const Cart = () => {
                       <td className="td">
                         <Quantity
                           quantity={item.quantity}
-                          inc={inc}
-                          dec={dec}
+                          inc={() => inc(item._id)}
+                          dec={() => dec(item._id)}
                           theme="indigo"
                         />
                       </td>
@@ -71,9 +81,11 @@ const Cart = () => {
             </table>
           </div>
         ) : (
-          "Cart is empty"
+          <div className="bg-indigo-50 border border-indigo-100 p-4 rounded-md text-sm font-medium text-indigo-800">
+            Cart is empty!
+          </div>
         )}
-      </div>
+      </motion.div>
     </>
   );
 };

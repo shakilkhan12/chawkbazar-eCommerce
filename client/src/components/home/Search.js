@@ -14,6 +14,9 @@ const Search = () => {
     id === "search" && dispatch(toggleSearchBar());
   };
   const searchProducts = () => {
+    if (state === "") {
+      return;
+    }
     navgiate(`/search-products/${state}/1`);
     dispatch(toggleSearchBar());
   };
