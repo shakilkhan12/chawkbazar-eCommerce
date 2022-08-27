@@ -1,4 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import currency from "currency-formatter";
 import { BsTrash } from "react-icons/bs";
 import { motion } from "framer-motion";
@@ -11,9 +13,11 @@ import {
   removeItem,
 } from "../../store/reducers/cartReducer";
 import { Link } from "react-router-dom";
+import { useSendPaymentMutation } from "../../store/services/paymentService";
 
 const Cart = () => {
   const { cart, total } = useSelector((state) => state.cartReducer);
+  const { userToken } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const inc = (id) => {
     dispatch(incQuantity(id));
@@ -27,6 +31,21 @@ const Cart = () => {
       dispatch(removeItem(id));
     }
   };
+  const navigate = useNavigate();
+  const [doPayment, response] = useSendPaymentMutation();
+  console.log("payment response", response);
+  const pay = () => {
+    if (userToken) {
+      doPayment();
+    } else {
+      navigate("/login");
+    }
+  };
+  useEffect(() => {
+    if (response?.isSuccess) {
+      window.location.href = response?.data?.url;
+    }
+  }, [response]);
   return (
     <>
       <Nav />
@@ -68,7 +87,7 @@ const Cart = () => {
                             className="w-12 h-12 object-cover rounded-full"
                           />
                         </td>
-                        <td className="td font-medium">{item.title}</td>
+                        <td className=" td font-medium">{item.title}</td>
                         <td className="td">
                           <span
                             className="block w-[15px] h-[15px] rounded-full"
@@ -114,12 +133,12 @@ const Cart = () => {
                 <span className="text-lg font-semibold text-indigo-800 mr-10">
                   {currency.format(total, { code: "USD" })}
                 </span>
-                <Link
-                  to="/"
+                <button
                   className="btn bg-indigo-600 text-sm font-medium py-2.5"
+                  onClick={pay}
                 >
                   checkout
-                </Link>
+                </button>
               </div>
             </div>
           </>
