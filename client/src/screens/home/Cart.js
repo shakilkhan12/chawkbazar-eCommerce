@@ -17,7 +17,7 @@ import { useSendPaymentMutation } from "../../store/services/paymentService";
 
 const Cart = () => {
   const { cart, total } = useSelector((state) => state.cartReducer);
-  const { userToken } = useSelector((state) => state.authReducer);
+  const { userToken, user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const inc = (id) => {
     dispatch(incQuantity(id));
@@ -34,9 +34,10 @@ const Cart = () => {
   const navigate = useNavigate();
   const [doPayment, response] = useSendPaymentMutation();
   console.log("payment response", response);
+  console.log(user);
   const pay = () => {
     if (userToken) {
-      doPayment();
+      doPayment({ cart, id: user.id });
     } else {
       navigate("/login");
     }
@@ -46,6 +47,7 @@ const Cart = () => {
       window.location.href = response?.data?.url;
     }
   }, [response]);
+
   return (
     <>
       <Nav />
@@ -137,7 +139,7 @@ const Cart = () => {
                   className="btn bg-indigo-600 text-sm font-medium py-2.5"
                   onClick={pay}
                 >
-                  checkout
+                  {response.isLoading ? "Loading..." : "checkout"}
                 </button>
               </div>
             </div>

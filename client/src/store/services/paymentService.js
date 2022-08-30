@@ -8,10 +8,11 @@ const paymentService = createApi({
   endpoints: (builder) => {
     return {
       sendPayment: builder.mutation({
-        query: () => {
+        query: (cart) => {
           return {
             url: "/create-checkout-session",
             method: "POST",
+            body: cart,
           };
         },
       }),
