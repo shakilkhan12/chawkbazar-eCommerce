@@ -11,6 +11,14 @@ const app = express();
 // database connection
 connect();
 app.use(cors());
+app.post(
+  "/api/webhook",
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString();
+    },
+  })
+);
 // add middleware
 app.use(express.json());
 

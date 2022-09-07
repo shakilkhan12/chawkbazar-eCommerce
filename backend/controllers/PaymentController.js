@@ -1,4 +1,3 @@
-const formatCurrency = require("format-currency");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 const User = require("../models/User");
 class PaymentController {
