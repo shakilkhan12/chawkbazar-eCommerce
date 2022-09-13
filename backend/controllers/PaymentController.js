@@ -1,5 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 const User = require("../models/User");
+const OrderModel = require("../models/OrderModel");
+const ProductModel = require("../models/ProductModel");
 class PaymentController {
   async paymentProcess(req, res, next) {
     const { cart, id } = req.body;
@@ -13,6 +15,7 @@ class PaymentController {
         size: item.size,
         color: item.color,
         quantity: item.quantity,
+        userId: user._id,
       };
     });
     const customer = await stripe.customers.create({
@@ -97,8 +100,35 @@ class PaymentController {
         break;
       case "checkout.session.completed":
         const data = event.data.object;
-        const customer = await stripe.customers.retrieve(data.customer);
-        console.log("customer :", customer);
+        let customer = await stripe.customers.retrieve(data.customer);
+        customer = JSON.parse(customer?.metadata?.cart);
+        customer.forEach(async (ctr) => {
+          try {
+            await OrderModel.create({
+              productId: ctr._id,
+              userId: ctr.userId,
+              size: ctr.size,
+              color: ctr.color,
+              quantities: ctr.quantity,
+              address: data.customer_details.address,
+            });
+            const product = await ProductModel.findOne({ _id: ctr._id });
+            if (product) {
+              let stock = product.stock - ctr.quantity;
+              if (stock < 0) {
+                stock = 0;
+              }
+              await ProductModel.findByIdAndUpdate(
+                ctr._id,
+                { stock },
+                { new: true }
+              );
+            }
+          } catch (error) {
+            console.log(error.message);
+            return response.status(500).json("Server internal error");
+          }
+        });
         break;
       default:
         console.log(`Unhandled event type ${event.type}`);
