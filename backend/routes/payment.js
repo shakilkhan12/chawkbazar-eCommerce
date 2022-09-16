@@ -7,4 +7,5 @@ router.post(
   express.raw({ type: "application/json" }),
   PaymentController.checkOutSession
 );
+router.get("/verify-payment/:id", PaymentController.paymentVerify);
 module.exports = router;
