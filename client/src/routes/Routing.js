@@ -18,6 +18,7 @@ import CatProducts from "../screens/home/CatProducts";
 import Product from "../screens/home/Product";
 import SearchProducts from "../screens/home/SearchProducts";
 import Cart from "../screens/home/Cart";
+import Orders from "../screens/dashboard/Orders";
 const Routing = () => {
   return (
     <BrowserRouter>
@@ -113,6 +114,8 @@ const Routing = () => {
               </Private>
             }
           />
+          <Route path="orders" element={<Orders />} />
+          <Route path="orders/:page" element={<Orders />} />
         </Route>
       </Routes>
     </BrowserRouter>

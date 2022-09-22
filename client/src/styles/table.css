@@ -10,3 +10,15 @@
 .td {
     @apply p-4 text-sm text-gray-700;
 }
+.dashboard-table {
+    @apply w-full bg-gray-900 rounded-md;
+}
+.dashboard-tr {
+    @apply border-b border-gray-800 text-left; 
+}
+.dashboard-th {
+    @apply p-3 uppercase text-sm font-medium text-gray-500;
+}
+.dashboard-td {
+    @apply p-3 capitalize text-sm font-normal text-gray-400;
+}
