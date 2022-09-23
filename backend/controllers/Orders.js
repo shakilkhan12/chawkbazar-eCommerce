@@ -21,5 +21,20 @@ class Orders {
       console.log(error.message);
     }
   }
+  async orderDetails(req, res) {
+    const { id } = req.params;
+    try {
+      const details = await OrderModel.findOne({ _id: id })
+        .populate(
+          "productId",
+          "-colors -sizes -createdAt -updatedAt -stock -image2 -image3"
+        )
+        .populate("userId", "-password -updatedAt -createdAt -admin");
+      return res.status(200).json({ details });
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).json({ errors: error });
+    }
+  }
 }
 module.exports = new Orders();

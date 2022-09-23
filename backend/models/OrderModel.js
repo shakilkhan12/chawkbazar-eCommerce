@@ -28,9 +28,7 @@ const orderSchema = Schema(
       type: Boolean,
     },
   },
-  {
-    timestampe: true,
-  }
+  { timestamps: true }
 );
 const OrderModel = model("order", orderSchema);
 module.exports = OrderModel;

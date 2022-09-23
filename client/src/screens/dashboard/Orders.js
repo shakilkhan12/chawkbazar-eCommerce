@@ -8,6 +8,7 @@ const Orders = () => {
   let { page } = useParams();
   page = page ? page : 1;
   const { data, isFetching } = useGetOrdersQuery(page);
+  console.log(data);
   return (
     <Wrapper>
       <ScreenHeader>Orders</ScreenHeader>
@@ -22,6 +23,7 @@ const Orders = () => {
                     <th className="dashboard-th">quantities</th>
                     <th className="dashboard-th">image</th>
                     <th className="dashboard-th">received</th>
+                    <th className="dashboard-th">Delivered</th>
                     <th className="dashboard-th">details</th>
                   </tr>
                 </thead>
@@ -38,11 +40,14 @@ const Orders = () => {
                         />
                       </td>
                       <td className="dashboard-td">
-                        {order.received ? "Received" : "Not Received"}
+                        {order.received ? "Yes" : "No"}
+                      </td>
+                      <td className="dashboard-td">
+                        {order.status ? "Yes" : "No"}
                       </td>
                       <td className="dashboard-td">
                         <Link
-                          to="/dashboard"
+                          to={`/dashboard/order-details/${order._id}`}
                           className="btn btn-warning bg-indigo-600 text-xs font-bold"
                         >
                           details

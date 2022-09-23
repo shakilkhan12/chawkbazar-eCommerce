@@ -19,6 +19,7 @@ import Product from "../screens/home/Product";
 import SearchProducts from "../screens/home/SearchProducts";
 import Cart from "../screens/home/Cart";
 import Orders from "../screens/dashboard/Orders";
+import OrderDetails from "../screens/dashboard/OrderDetails";
 const Routing = () => {
   return (
     <BrowserRouter>
@@ -116,6 +117,7 @@ const Routing = () => {
           />
           <Route path="orders" element={<Orders />} />
           <Route path="orders/:page" element={<Orders />} />
+          <Route path="order-details/:id" element={<OrderDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
