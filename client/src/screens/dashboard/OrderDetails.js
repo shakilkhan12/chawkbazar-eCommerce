@@ -1,4 +1,7 @@
 import { useParams, Link } from "react-router-dom";
+import { useRef } from "react";
+import ReactToPrint from "react-to-print";
+import { BsPrinter } from "react-icons/bs";
 import currency from "currency-formatter";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -9,6 +12,7 @@ import { discount } from "../../utils/discount";
 
 const OrderDetails = () => {
   const { id } = useParams();
+  const componentRef = useRef();
   const { data, isFetching } = useDetailsQuery(id);
   const total =
     discount(
@@ -23,20 +27,31 @@ const OrderDetails = () => {
             <MdOutlineKeyboardBackspace />
           </Link>
           <span className="ml-4"> Order Details</span>
+          <span className="ml-4">
+            <ReactToPrint
+              trigger={() => (
+                <button className="flex items-center btn bg-indigo-600 py-1 text-sm font-semibold px-3">
+                  <BsPrinter /> <span className="ml-2">print</span>
+                </button>
+              )}
+              content={() => componentRef.current}
+            />
+          </span>
         </div>
       </ScreenHeader>
       {!isFetching ? (
-        <>
+        <div ref={componentRef}>
           <h3 className="capitalize text-gray-400">
             order number{" "}
             <span className="text-lg text-gray-300 ml-4">
               #{data?.details?._id}
             </span>
           </h3>
+
           <div className="flex flex-wrap -mx-5">
             <div className="w-full md:w-8/12 p-5">
               <div>
-                <table className="dashboard-table">
+                <table className="bg-transparent border-gray-600 rounded-none md:rounded-md dashboard-table">
                   <thead>
                     <tr className="dashboard-tr">
                       <th className="dashboard-th">image</th>
@@ -75,13 +90,21 @@ const OrderDetails = () => {
               </div>
             </div>
             <div className="w-full md:w-4/12 p-5">
-              <div className="bg-gray-900 p-4 rounded-md">
+              <div className="border border-gray-600 rounded-none md:rounded-md p-4">
                 <div className="border-b pb-3 border-b-gray-600">
                   <h4 className="capitalize text-base text-gray-500">
                     customer name
                   </h4>
                   <span className="text-gray-400 text-base font-medium capitalize mt-2">
                     {data?.details?.userId?.name}
+                  </span>
+                </div>
+                <div className="border-b pb-3 border-b-gray-600">
+                  <h4 className="capitalize text-base text-gray-500">
+                    product name
+                  </h4>
+                  <span className="text-gray-400 text-base font-medium capitalize mt-2">
+                    {data?.details?.productId?.title}
                   </span>
                 </div>
 
@@ -107,7 +130,7 @@ const OrderDetails = () => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       ) : (
         <Spinner />
       )}
