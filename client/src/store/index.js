@@ -26,6 +26,7 @@ const Store = configureStore({
       productService.middleware,
       homeProducts.middleware,
       paymentService.middleware,
+      orderService.middleware,
     ]),
 });
 export default Store;
