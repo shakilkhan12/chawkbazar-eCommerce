@@ -46,7 +46,7 @@ const OrderDetails = () => {
             />
           </span>
           <span className="ml-4">
-            {!data?.details?.status && (
+            {!isFetching && !data?.details?.status && (
               <button
                 className="btn bg-orange-600 py-1 text-sm font-semibold px-3"
                 onClick={sentOrder}

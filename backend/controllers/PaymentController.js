@@ -77,7 +77,6 @@ class PaymentController {
   }
   async checkOutSession(request, response) {
     const sig = request.headers["stripe-signature"];
-
     let event;
     try {
       event = stripe.webhooks.constructEvent(
@@ -85,6 +84,7 @@ class PaymentController {
         sig,
         process.env.ENDPOINTSECRET
       );
+      console.log("payment success");
     } catch (err) {
       console.log(err.message);
       response.status(400).send(`Webhook Error: ${err.message}`);

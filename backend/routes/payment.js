@@ -9,7 +9,6 @@ router.post(
 );
 router.post(
   "/webhook",
-  Authorization.authorized,
   express.raw({ type: "application/json" }),
   PaymentController.checkOutSession
 );
