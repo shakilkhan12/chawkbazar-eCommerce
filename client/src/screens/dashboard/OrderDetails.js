@@ -75,6 +75,8 @@ const OrderDetails = () => {
                       <th className="dashboard-th">image</th>
                       <th className="dashboard-th">quantities</th>
                       <th className="dashboard-th">price</th>
+                      <th className="dashboard-th">size</th>
+                      <th className="dashboard-th">color</th>
                       <th className="dashboard-th">total</th>
                     </tr>
                   </thead>
@@ -99,8 +101,17 @@ const OrderDetails = () => {
                           { code: "USD" }
                         )}
                       </td>
-                      <td className="dashboard-th">
+                      <td className="dashboard-td">
+                        {data?.details?.size ? data?.details?.size : "No size"}
+                      </td>
+                      <td className="dashboard-td">
                         {currency.format(total, { code: "USD" })}
+                      </td>
+                      <td className="dashboard-td">
+                        <span
+                          className="block w-[15px] h-[15px] rounded-full"
+                          style={{ background: data?.details?.color }}
+                        ></span>
                       </td>
                     </tr>
                   </tbody>
