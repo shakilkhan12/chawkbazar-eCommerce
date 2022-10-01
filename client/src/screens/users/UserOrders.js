@@ -12,9 +12,7 @@ const UserOrders = () => {
   let { page } = useParams();
   page = page ? page : 1;
   const { user } = useSelector((state) => state.authReducer);
-  console.log(user);
   const { data, isFetching } = useGetOrdersQuery({ page, userId: user.id });
-  console.log(data);
   return (
     <>
       <Nav />
@@ -90,7 +88,10 @@ const UserOrders = () => {
                                 </td>
                                 <td className="td font-bold ">{total}</td>
                                 <td className="td">
-                                  <Link to="/" className="btn btn-indigo">
+                                  <Link
+                                    to={`/user-order-details/${item._id}`}
+                                    className="btn btn-indigo"
+                                  >
                                     details
                                   </Link>
                                 </td>

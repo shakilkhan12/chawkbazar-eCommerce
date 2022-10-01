@@ -21,6 +21,7 @@ import Cart from "../screens/home/Cart";
 import Orders from "../screens/dashboard/Orders";
 import OrderDetails from "../screens/dashboard/OrderDetails";
 import UserOrders from "../screens/users/UserOrders";
+import UserOrderDetails from "../screens/users/UserOrderDetails";
 const Routing = () => {
   return (
     <BrowserRouter>
@@ -42,6 +43,7 @@ const Routing = () => {
           <Route path="user" element={<Dashboard />} />
           <Route path="orders" element={<UserOrders />} />
           <Route path="orders/:page" element={<UserOrders />} />
+          <Route path="user-order-details/:id" element={<UserOrderDetails />} />
         </Route>
         <Route path="auth">
           <Route
