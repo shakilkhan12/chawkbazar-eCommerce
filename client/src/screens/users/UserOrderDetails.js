@@ -67,6 +67,14 @@ const UserOrderDetails = () => {
                         {data?.details?.productId?.title}
                       </span>
                     </div>
+                    <div className="flex mt-1">
+                      <h4 className="capitalize text-base font-normal text-gray-600">
+                        order received:
+                      </h4>
+                      <span className="ml-2 font-medium text-gray-900 capitalize">
+                        {data?.details?.received ? "Yes" : "No"}
+                      </span>
+                    </div>
                     <div className="overflow-x-auto mt-4">
                       <table className="w-full">
                         <thead>

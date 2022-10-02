@@ -4,5 +4,5 @@ const Authorization = require("../services/Authorization");
 const router = Router();
 router.get("/orders", Authorization.authorized, Orders.getOrders);
 router.get("/order-details/:id", Authorization.authorized, Orders.orderDetails);
-router.put("/order-deliver/:id", Authorization.authorized, Orders.deliverOrder);
+router.put("/order-update", Authorization.authorized, Orders.updateOrder);
 module.exports = router;

@@ -37,16 +37,23 @@ class Orders {
       return res.status(500).json({ errors: error });
     }
   }
-  async deliverOrder(req, res) {
-    const { id } = req.params;
+  async updateOrder(req, res) {
+    const { id, status } = req.query;
+    let option = {};
+    if (status === "delivered") {
+      option = { status: true };
+    } else if (status === "received") {
+      option = { received: true };
+    }
     try {
-      const updatedProduct = await OrderModel.findByIdAndUpdate(
-        id,
-        { status: true },
-        { new: true }
-      );
+      const updatedProduct = await OrderModel.findByIdAndUpdate(id, option, {
+        new: true,
+      });
       return res.status(200).json({
-        msg: "Product has been sent to customer and it' on the way right now",
+        msg:
+          status === "delivered"
+            ? "Order has delivered"
+            : status === "received" && "Order received",
       });
     } catch (error) {
       return res.status(500).json({ errors: error.message });

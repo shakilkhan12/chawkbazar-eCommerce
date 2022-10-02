@@ -32,8 +32,18 @@ const userOrdersService = createApi({
         },
         providesTags: ["orders"],
       }),
+      receivedOrder: builder.mutation({
+        query: (id) => {
+          return {
+            url: `/order-update?id=${id}&status=received`,
+            method: "PUT",
+          };
+        },
+        invalidatesTags: ["orders"],
+      }),
     };
   },
 });
-export const { useGetOrdersQuery, useDetailsQuery } = userOrdersService;
+export const { useGetOrdersQuery, useDetailsQuery, useReceivedOrderMutation } =
+  userOrdersService;
 export default userOrdersService;
