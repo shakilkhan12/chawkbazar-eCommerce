@@ -15,7 +15,7 @@ class Orders {
         .populate("userId", "-password -updatedAt -createdAt -admin")
         .skip(skip)
         .limit(perPage)
-        .sort({ updatedAt: -1 });
+        .sort({ createdAt: -1 });
       console.log(response);
       return res.status(200).json({ orders: response, perPage, count });
     } catch (error) {

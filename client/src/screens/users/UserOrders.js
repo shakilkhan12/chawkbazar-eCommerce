@@ -79,17 +79,23 @@ const UserOrders = () => {
                                   </Link>
                                 </td>
                                 <td className="td">
-                                  {item.received ? (
-                                    <span className="capitalize font-medium text-emerald-600">
-                                      received
-                                    </span>
+                                  {item.status ? (
+                                    item.received ? (
+                                      <span className="capitalize font-medium text-emerald-600">
+                                        received
+                                      </span>
+                                    ) : (
+                                      <button
+                                        className="btn btn-indigo"
+                                        onClick={() => orderReceived(item._id)}
+                                      >
+                                        received?
+                                      </button>
+                                    )
                                   ) : (
-                                    <button
-                                      className="btn btn-indigo"
-                                      onClick={() => orderReceived(item._id)}
-                                    >
-                                      received?
-                                    </button>
+                                    <span className="capitalize font-medium text-rose-600">
+                                      under process
+                                    </span>
                                   )}
                                 </td>
                               </tr>
@@ -107,7 +113,9 @@ const UserOrders = () => {
                     />
                   </>
                 ) : (
-                  "no orders"
+                  <div className="bg-indigo-50 border border-indigo-100 rounded px-4 py-2.5 capitalize text-indigo-900 text-sm font-medium">
+                    no orders
+                  </div>
                 )
               ) : (
                 <Spinner />
