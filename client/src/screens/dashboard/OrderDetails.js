@@ -74,7 +74,7 @@ const OrderDetails = () => {
           </h3>
           {data?.details?.received && (
             <h3 className="capitalize text-gray-400 mt-2">
-              order date:{" "}
+              received date:{" "}
               <span className="text-sm text-gray-300 ml-4">
                 {moment(data?.details?.updatedAt).format("MMMM Do YYYY")}
               </span>
