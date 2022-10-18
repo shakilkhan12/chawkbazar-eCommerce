@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import currency from "currency-formatter";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import moment from "moment";
@@ -8,7 +9,12 @@ import AccountList from "../../components/home/AccountList";
 import { useDetailsQuery } from "../../store/services/userOrdersService";
 import Spinner from "../../components/Spinner";
 import { discount } from "../../utils/discount";
+import ReviewForm from "../../components/ReviewForm";
 const UserOrderDetails = () => {
+  const [state, setState] = useState(false);
+  const toggleReview = () => {
+    setState(!state);
+  };
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isFetching } = useDetailsQuery(id);
@@ -25,6 +31,7 @@ const UserOrderDetails = () => {
 
   return (
     <>
+      <ReviewForm state={state} toggleReview={toggleReview} />
       <Nav />
       <div className="mt-[70px]">
         <Header>order details</Header>
@@ -98,6 +105,17 @@ const UserOrderDetails = () => {
                         </span>
                       </div>
                     )}
+                    <div className="flex mt-2 items-center">
+                      <h4 className="capitalize text-base font-normal text-gray-600 mr-5">
+                        add rating
+                      </h4>
+                      <button
+                        className="btn-indigo rounded"
+                        onClick={() => toggleReview()}
+                      >
+                        add reivew
+                      </button>
+                    </div>
                     <div className="overflow-x-auto mt-4">
                       <table className="w-full">
                         <thead>
