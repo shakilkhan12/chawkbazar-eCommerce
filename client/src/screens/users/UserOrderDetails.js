@@ -105,17 +105,20 @@ const UserOrderDetails = () => {
                         </span>
                       </div>
                     )}
-                    <div className="flex mt-2 items-center">
-                      <h4 className="capitalize text-base font-normal text-gray-600 mr-5">
-                        add rating
-                      </h4>
-                      <button
-                        className="btn-indigo rounded"
-                        onClick={() => toggleReview()}
-                      >
-                        add reivew
-                      </button>
-                    </div>
+                    {data?.details?.received && !data?.details?.review && (
+                      <div className="flex mt-2 items-center">
+                        <h4 className="capitalize text-base font-normal text-gray-600 mr-5">
+                          add rating
+                        </h4>
+                        <button
+                          className="btn-indigo rounded"
+                          onClick={() => toggleReview()}
+                        >
+                          add reivew
+                        </button>
+                      </div>
+                    )}
+
                     <div className="overflow-x-auto mt-4">
                       <table className="w-full">
                         <thead>

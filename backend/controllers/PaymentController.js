@@ -70,7 +70,7 @@ class PaymentController {
       }),
       customer: customer.id,
       mode: "payment",
-      success_url: `${process.env.CLIENT}/orders?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.CLIENT}/user?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.CLIENT}/cart`,
     });
     res.json({ url: session.url });
@@ -104,6 +104,16 @@ class PaymentController {
         customer = JSON.parse(customer?.metadata?.cart);
         customer.forEach(async (ctr) => {
           try {
+            let reviewStatus = false;
+            const findOrder = await OrderModel.findOne({
+              productId: ctr._id,
+              userId: ctr.userId,
+            })
+              .where("review")
+              .equals(true);
+            if (findOrder) {
+              reviewStatus = true;
+            }
             await OrderModel.create({
               productId: ctr._id,
               userId: ctr.userId,
@@ -111,6 +121,7 @@ class PaymentController {
               color: ctr.color,
               quantities: ctr.quantity,
               address: data.customer_details.address,
+              review: reviewStatus,
             });
             const product = await ProductModel.findOne({ _id: ctr._id });
             if (product) {
