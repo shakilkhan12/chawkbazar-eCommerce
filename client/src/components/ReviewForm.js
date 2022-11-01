@@ -1,4 +1,16 @@
-const ReviewForm = ({ state,toggleReview }) => {
+import { useForm } from "../hooks/Form";
+import { usePostReviewMutation } from "../store/services/orderService";
+const ReviewForm = ({ state, toggleReview }) => {
+  const { state: ratingState, onChange } = useForm({
+    rating: "",
+    message: "",
+  });
+  const [submitReview, response] = usePostReviewMutation();
+  console.log("Response: ", response);
+  const addReview = (e) => {
+    e.preventDefault();
+    submitReview(ratingState);
+  };
   return state ? (
     <div className="fixed inset-0 w-full h-full bg-black/40 z-[1000] flex items-center justify-center">
       <div className="w-[90%] sm:w-8/12 md:w-6/12 lg:w-4/12">
@@ -6,7 +18,16 @@ const ReviewForm = ({ state,toggleReview }) => {
           <h1 className="mb-3 capitalize text-base font-medium text-gray-700">
             add a review
           </h1>
-          <form>
+          {response.isError &&
+            response?.error?.data?.errors.map((err) => (
+              <p
+                key={err}
+                className="bg-rose-50 px-4 py-2.5 text-rose-900 rounded mb-2 font-medium"
+              >
+                {err.msg}
+              </p>
+            ))}
+          <form onSubmit={addReview}>
             <div className="mb-3">
               <label
                 htmlFor="rating"
@@ -14,7 +35,13 @@ const ReviewForm = ({ state,toggleReview }) => {
               >
                 rating
               </label>
-              <select name="rating" id="rating" className="form-input">
+              <select
+                name="rating"
+                id="rating"
+                className="form-input"
+                onChange={onChange}
+                value={ratingState.rating}
+              >
                 <option value="">Choose a rating</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -30,12 +57,14 @@ const ReviewForm = ({ state,toggleReview }) => {
               message
             </label>
             <textarea
-              name=""
+              name="message"
               id=""
               cols="30"
               rows="5"
               className="form-input"
               placeholder="Write a message"
+              onChange={onChange}
+              value={ratingState.message}
             ></textarea>
             <div className="mt-3 flex justify-between">
               <input
@@ -43,7 +72,10 @@ const ReviewForm = ({ state,toggleReview }) => {
                 value="add reivew"
                 className="btn-indigo rounded"
               />
-              <button className="px-4 py-2 text-sm font-medium bg-rose-600 capitalize text-white rounded" onClick={() => toggleReview()}>
+              <button
+                className="px-4 py-2 text-sm font-medium bg-rose-600 capitalize text-white rounded"
+                onClick={() => toggleReview()}
+              >
                 close
               </button>
             </div>

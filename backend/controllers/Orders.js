@@ -1,3 +1,4 @@
+const { validationResult } = require("express-validator");
 const OrderModel = require("../models/OrderModel");
 class Orders {
   async getOrders(req, res) {
@@ -57,6 +58,14 @@ class Orders {
       });
     } catch (error) {
       return res.status(500).json({ errors: error.message });
+    }
+  }
+  async createRating(req, res) {
+    const errors = validationResult(req);
+    const { rating, message } = req.body;
+    if (errors.isEmpty()) {
+    } else {
+      return res.status(400).json({ errors: errors.array() });
     }
   }
 }

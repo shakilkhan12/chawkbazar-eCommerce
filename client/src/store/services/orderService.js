@@ -41,9 +41,22 @@ const orderService = createApi({
         },
         invalidatesTags: ["orders"],
       }),
+      postReview: builder.mutation({
+        query: (body) => {
+          return {
+            url: `/add-review`,
+            method: "POST",
+            body,
+          };
+        },
+      }),
     };
   },
 });
-export const { useGetOrdersQuery, useDetailsQuery, useDeliverOrderMutation } =
-  orderService;
+export const {
+  useGetOrdersQuery,
+  useDetailsQuery,
+  useDeliverOrderMutation,
+  usePostReviewMutation,
+} = orderService;
 export default orderService;
