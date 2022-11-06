@@ -1,6 +1,7 @@
 import { useForm } from "../hooks/Form";
 import { usePostReviewMutation } from "../store/services/orderService";
-const ReviewForm = ({ state, toggleReview }) => {
+const ReviewForm = ({ state, toggleReview, data }) => {
+  console.log("form data: ", data);
   const { state: ratingState, onChange } = useForm({
     rating: "",
     message: "",
@@ -9,7 +10,12 @@ const ReviewForm = ({ state, toggleReview }) => {
   console.log("Response: ", response);
   const addReview = (e) => {
     e.preventDefault();
-    submitReview(ratingState);
+    submitReview({
+      ...ratingState,
+      user: data?.details?.userId?._id,
+      product: data?.details?.productId?._id,
+      id: data.details?._id,
+    });
   };
   return state ? (
     <div className="fixed inset-0 w-full h-full bg-black/40 z-[1000] flex items-center justify-center">

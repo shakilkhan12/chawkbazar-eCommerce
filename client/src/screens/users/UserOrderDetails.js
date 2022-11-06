@@ -18,7 +18,7 @@ const UserOrderDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isFetching } = useDetailsQuery(id);
-  console.log(data);
+  console.log("orders: ", data);
   const total = currency.format(
     discount(
       data?.details?.productId?.price,
@@ -31,7 +31,7 @@ const UserOrderDetails = () => {
 
   return (
     <>
-      <ReviewForm state={state} toggleReview={toggleReview} />
+      <ReviewForm state={state} data={data} toggleReview={toggleReview} />
       <Nav />
       <div className="mt-[70px]">
         <Header>order details</Header>
