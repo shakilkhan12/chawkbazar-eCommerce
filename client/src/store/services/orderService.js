@@ -49,6 +49,7 @@ const orderService = createApi({
             body,
           };
         },
+        invalidatesTags: ["orders"],
       }),
     };
   },

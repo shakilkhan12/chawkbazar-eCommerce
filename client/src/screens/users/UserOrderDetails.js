@@ -10,6 +10,7 @@ import { useDetailsQuery } from "../../store/services/userOrdersService";
 import Spinner from "../../components/Spinner";
 import { discount } from "../../utils/discount";
 import ReviewForm from "../../components/ReviewForm";
+import DetailsList from "../../components/DetailsList";
 const UserOrderDetails = () => {
   const [state, setState] = useState(false);
   const toggleReview = () => {
@@ -50,7 +51,7 @@ const UserOrderDetails = () => {
                 <span className="ml-5">details</span>
               </h1>
               {!isFetching ? (
-                <div className="flex flex-col md:flex-row flex-wrap mt-2">
+                <div className="flex flex-col md:flex-row flex-wrap my-5">
                   <div className="w-[130px] md:w-[160px] h-[130px] md:h-[160px] overflow-hidden">
                     <img
                       src={`/images/${data?.details?.productId?.image1}`}
@@ -59,59 +60,39 @@ const UserOrderDetails = () => {
                     />
                   </div>
                   <div className="flex-1 my-4 md:my-0 md:ml-4">
-                    <div className="flex">
-                      <h4 className="capitalize text-base font-normal text-gray-600">
-                        order number:
-                      </h4>
-                      <span className="ml-2 font-medium text-gray-900">
-                        {data?.details?._id}
-                      </span>
-                    </div>
-                    <div className="flex mt-1">
-                      <h4 className="capitalize text-base font-normal text-gray-600">
-                        product name:
-                      </h4>
-                      <span className="ml-2 font-medium text-gray-900 capitalize">
-                        {data?.details?.productId?.title}
-                      </span>
-                    </div>
-                    <div className="flex mt-1">
-                      <h4 className="capitalize text-base font-normal text-gray-600">
-                        order received:
-                      </h4>
-                      <span className="ml-2 font-medium text-gray-900 capitalize">
-                        {data?.details?.received ? "Yes" : "No"}
-                      </span>
-                    </div>
-                    <div className="flex mt-1">
-                      <h4 className="capitalize text-base font-normal text-gray-600">
-                        order date:
-                      </h4>
-                      <span className="ml-2 font-medium text-gray-900 capitalize">
-                        {moment(data?.details?.createdAt).format(
+                    <DetailsList
+                      label="order number"
+                      data={data?.details?._id}
+                    />
+                    <DetailsList
+                      label="product name"
+                      data={data?.details?.productId?.title}
+                    />
+                    <DetailsList
+                      label="order received"
+                      data={data?.details?.received ? "Yes" : "No"}
+                    />
+                    <DetailsList
+                      label="order date"
+                      data={moment(data?.details?.createdAt).format(
+                        "MMMM Do YYYY"
+                      )}
+                    />
+                    {data?.details?.received && (
+                      <DetailsList
+                        label="received date"
+                        data={moment(data?.details?.updatedAt).format(
                           "MMMM Do YYYY"
                         )}
-                      </span>
-                    </div>
-                    {data?.details?.received && (
-                      <div className="flex mt-1">
-                        <h4 className="capitalize text-base font-normal text-gray-600">
-                          received date:
-                        </h4>
-                        <span className="ml-2 font-medium text-gray-900 capitalize">
-                          {moment(data?.details?.updatedAt).format(
-                            "MMMM Do YYYY"
-                          )}
-                        </span>
-                      </div>
+                      />
                     )}
                     {data?.details?.received && !data?.details?.review && (
-                      <div className="flex mt-2 items-center">
+                      <div className="flex mt-2 items-center justify-between">
                         <h4 className="capitalize text-base font-normal text-gray-600 mr-5">
                           add rating
                         </h4>
                         <button
-                          className="btn-indigo rounded"
+                          className="btn-indigo rounded !py-2 !text-sm"
                           onClick={() => toggleReview()}
                         >
                           add reivew
